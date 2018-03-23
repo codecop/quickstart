@@ -15,8 +15,8 @@ http://walkmod.com/docs#usage
   
     * `walkmod plugins`
     * imports-cleaner
-    * override
     * license-applier
+    * override
     * refactor
 
 * Tutorial
@@ -32,3 +32,6 @@ http://walkmod.com/docs#usage
     * configure: `<param name="licenseFile">src/main/license-header.txt</param>`
     * or `walkmod add -DlicenseFile=... license-applier`
     * only one transformation?
+
+    * `walkmod add override`
+    * chain macht keinen Unterschied, only for license-applier and imports-cleaner
