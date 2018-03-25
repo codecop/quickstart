@@ -29,6 +29,8 @@
     * license-applier
     * override
     * refactor
+    * `name` loads `org.walkmod:walkmod-" + name + "-plugin:" + name`
+    * `pluginId:beanId` loads `org.walkmod:walkmod-" + pluginId + "-plugin:" + beanId`
 
 * More Transformations
 
@@ -50,10 +52,12 @@
 ### Code Generation using Templates
 
 * See https://github.com/walkmod/jug
+* Transformation type `template` = `walkmod:commons:template`.
 * `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
 
 ### Custom (Groovy) Scripts
 
+* Transformation type `script` = `walkmod:commons:scripting`.
 * Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
 
     * https://www.voxxed.com/2014/11/walkmod-tutorial-apply-code-conventions-automatically/
@@ -82,6 +86,11 @@
 
 * https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
 * https://github.com/rpau/voxxed-age-checker
+* tbc
+
+## Writing Plugins/Visitors
+
+* all plugins are `VoidVisitor`s or similar.
 
 ## Trouble Shooting
 
@@ -96,10 +105,16 @@
 
 ### Issues
 
-    * `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"`
-    * license-applier and imports-cleaner do not work together
-    * no formatting is default writer in 3.0, documentation is wrong
-    * changes on walkmod.xml drop comments
-    * no tutorial for templating
-    * JavaPoet example destroys formatting
-    * JavaPoet and other scripting does not work together
+* `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"`
+    * need a SLF4J to Log4J bridge 
+* license-applier and imports-cleaner do not work together
+* no formatting is default writer in 3.0, documentation is wrong
+* changes on walkmod.xml drop comments
+* no tutorial for templating - found jug project later
+* JavaPoet example destroys formatting
+* JavaPoet and other scripting does not work together
+* `VisitorMessagesWriter` did not write on `walkmod check`
+* Downloads everything again (in fact an Ivy issue, allow to provide `ivysettings.xml` - in config folder).
+    * http://ant.apache.org/ivy/history/latest-milestone/tutorial/defaultconf.html
+    * https://stackoverflow.com/questions/8617963/ivysettings-xml-add-local-maven-path
+    * just changing it does not work...
