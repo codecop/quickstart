@@ -1,15 +1,11 @@
 # Steps
 
-> No # in path names!
-
 * `walkmod --version`
 * `walkmod init -f xml`
 * see `walkmod.xml`
-* done automatically when missing
+* done automatically when missing on any command
 
 ## Basic Usage 
-
-http://walkmod.com/docs#usage
 
 * What is there?
   
@@ -19,19 +15,31 @@ http://walkmod.com/docs#usage
     * override
     * refactor
 
-* Tutorial
+* Quickstart Tutorial
+    * http://walkmod.com/docs#usage
     * `walkmod add imports-cleaner`
     * `walkmod transformations`
     * `walkmod apply`
     * `git diff`
 
-* More
+* More Transformations
     * `walkmod add license-applier`
     * Missing license file at [src/main/walkmod/license-applier/license.txt]
     * `walkmod  inspect license-applier`
     * configure: `<param name="licenseFile">src/main/license-header.txt</param>`
     * or `walkmod add -DlicenseFile=... license-applier`
-    * only one transformation?
-
+    * ? license-applier and imports-cleaner do not work together
     * `walkmod add override`
-    * chain macht keinen Unterschied, only for license-applier and imports-cleaner
+    * `walkmod apply`
+    * `git diff`
+
+
+
+
+### Trouble Shooting
+
+* `walmod apply -e` shows errors 
+* ? cannot locate log file
+
+> No # in path names!
+> Does not work with Java 9
