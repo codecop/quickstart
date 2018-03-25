@@ -10,6 +10,7 @@
 
     * https://tomassetti.me/walkmod-automatically-refactor-code-to-apply-code-conventions/
     * http://walkmod.com/docs#usage
+    * https://github.com/walkmod/quickstart
     * `walkmod add imports-cleaner`
     * `walkmod transformations`
     * `walkmod apply`
@@ -69,12 +70,17 @@
 * Integrating with JavaPoet
 
     * https://blog.walkmod.com/how-to-maintain-java-architectures-with-javapoet-and-walkmod-45611b1bc627
+    * https://github.com/walkmod/helloworld-javapoet (empty)
     * `walkmod add -m script -Dlanguage=groovy -Dlocation=src\main\walkmod\scripts\serializable.groovy`
     * JavaPoet is part of Walkmod.
     * Add to test dependencies to create scripts: `com.squareup:javapoet:1.10.0`
 
+## PMD and Sonar Plugins
 
-### Trouble Shooting
+* https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
+* https://github.com/rpau/voxxed-age-checker
+
+## Trouble Shooting
 
 * `walkmod <command> --help` shows options.
 * `walkmod apply -e` shows errors.
@@ -82,10 +88,12 @@
 * use `println` in Groovy scripts.
 
 > No # in path names!
+
 > Does not work with Java 9
 
 ### Issues
-    * SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+
+    * `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"`
     * license-applier and imports-cleaner do not work together
     * no formatting is default writer in 3.0, documentation is wrong
     * changes on walkmod.xml drop comments
