@@ -49,6 +49,9 @@
 
 ### Code Generation using Templates
 
+* See https://github.com/walkmod/jug
+* `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
+
 ### Custom (Groovy) Scripts
 
 * Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
