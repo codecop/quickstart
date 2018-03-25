@@ -45,6 +45,15 @@
     * `git diff`
     * `walkmod set-writer javalang:string-writer` does not format, is default.
 
+* Code Generation using Templates
+
+* Custom (Groovy) Scripts
+
+    * Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
+    * `fields.groovy` makes all fields private.
+    * `walkmod add -m script -Dlanguage=groovy -Dlocation=src\main\walkmod\scripts\fields.groovy`
+    * `walkmod apply`
+    * `git diff`
 
 
 ### Trouble Shooting
@@ -60,3 +69,4 @@
     * SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
     * license-applier and imports-cleaner do not work together
     * no formatting is default writer in 3.0, documentation is wrong
+    * changes on walkmod.xml drop comments
