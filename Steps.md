@@ -19,6 +19,7 @@
 
     * provide using `walkmod`
     * provide using `-i` and `-x` in apply. 
+    * `walkmod check`
 
 * What is there?
 
@@ -45,15 +46,24 @@
     * `git diff`
     * `walkmod set-writer javalang:string-writer` does not format, is default.
 
-* Code Generation using Templates
+### Code Generation using Templates
 
-* Custom (Groovy) Scripts
+### Custom (Groovy) Scripts
 
-    * Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
+* Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
+
+    * https://www.voxxed.com/2014/11/walkmod-tutorial-apply-code-conventions-automatically/
     * `fields.groovy` makes all fields private.
     * `walkmod add -m script -Dlanguage=groovy -Dlocation=src\main\walkmod\scripts\fields.groovy`
+    * also works with `-Dcontent` and script directly
     * `walkmod apply`
     * `git diff`
+    
+* There is support for Groovy in Java IDEs and it helps for large Groovy scripts.    
+    
+    * Check version of Eclipse.
+    * Groovy plugin "GrEclipse", look for suitable release or snapshot on https://github.com/groovy/groovy-eclipse/wiki#releases
+    * How to Install see https://github.com/groovy/groovy-eclipse/wiki#how-to-install
 
 
 ### Trouble Shooting
@@ -70,3 +80,4 @@
     * license-applier and imports-cleaner do not work together
     * no formatting is default writer in 3.0, documentation is wrong
     * changes on walkmod.xml drop comments
+    * no tutorial for templating
