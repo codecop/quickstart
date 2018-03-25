@@ -11,12 +11,17 @@
             <param name="language">groovy</param>
             <param name="location">src\main\walkmod\scripts\fields.groovy</param>
         </transformation>
-         -->
         <transformation isMergeable="true" type="script">
             <param name="language">groovy</param>
             <param name="location">src\main\walkmod\scripts\log.groovy</param>
         </transformation>
+         -->
+        <transformation isMergeable="true" type="script">
+            <param name="language">groovy</param>
+            <param name="location">src\main\walkmod\scripts\serializable.groovy</param>
+        </transformation>
         <!-- 
+        <writer path="src/main/java" type="javalang:string-writer" />
         <writer path="src/main/java" type="java-formatter">
             <param name="configFile">src\config\eclipse_code_format.xml</param>
         </writer>

@@ -64,6 +64,14 @@
     * Check version of Eclipse.
     * Groovy plugin "GrEclipse", look for suitable release or snapshot on https://github.com/groovy/groovy-eclipse/wiki#releases
     * How to Install see https://github.com/groovy/groovy-eclipse/wiki#how-to-install
+    * Add core dependencies for code completion: `org.walkmod:walkmod-core:3.0.4, org.walkmod:javalang:4.8.8`
+
+* Integrating with JavaPoet
+
+    * https://blog.walkmod.com/how-to-maintain-java-architectures-with-javapoet-and-walkmod-45611b1bc627
+    * `walkmod add -m script -Dlanguage=groovy -Dlocation=src\main\walkmod\scripts\serializable.groovy`
+    * JavaPoet is part of Walkmod.
+    * Add to test dependencies to create scripts: `com.squareup:javapoet:1.10.0`
 
 
 ### Trouble Shooting
@@ -71,6 +79,7 @@
 * `walkmod <command> --help` shows options.
 * `walkmod apply -e` shows errors.
 * ? cannot locate mentioned log file.
+* use `println` in Groovy scripts.
 
 > No # in path names!
 > Does not work with Java 9
@@ -81,3 +90,5 @@
     * no formatting is default writer in 3.0, documentation is wrong
     * changes on walkmod.xml drop comments
     * no tutorial for templating
+    * JavaPoet example destroys formatting
+    * JavaPoet and other scripting does not work together
