@@ -1,8 +1,13 @@
 <!DOCTYPE walkmod PUBLIC "-//WALKMOD//DTD" "http://www.walkmod.com/dtd/walkmod-1.1.dtd">
 <walkmod>
-    <transformation type="imports-cleaner" />
-    <transformation type="license-applier">
-        <param name="licenseFile">src/main/license-header.txt</param>
-    </transformation>
-    <transformation type="override" />
+    <chain name="default">
+        <transformation type="imports-cleaner"/>
+        <transformation type="license-applier">
+            <param name="licenseFile">src/main/license-header.txt</param>
+        </transformation>
+        <transformation type="override"/>
+        <writer path="src/main/java" type="java-formatter">
+            <param name="configFile">src\config\eclipse_code_format.xml</param>
+        </writer>
+    </chain>
 </walkmod>

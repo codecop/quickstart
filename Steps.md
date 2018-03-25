@@ -33,13 +33,23 @@
     * `walkmod apply`
     * `git diff`
 
+* Formatter
+    * `walkmod set-writer -DconfigFile=myformatter.xml java-formatter` formats like Eclipse
+    * `walkmod apply`
+    * `git diff`
+    * `walkmod set-writer javalang:string-writer` does not format, is default.
 
 
 
 ### Trouble Shooting
 
 * `walmod apply -e` shows errors 
-* ? cannot locate log file
+* ? cannot locate mentioned log file
 
 > No # in path names!
 > Does not work with Java 9
+
+### Issues
+    * SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+    * ? license-applier and imports-cleaner do not work together
+    * ? no formatting is default writer in 3.0, documentation is wrong
