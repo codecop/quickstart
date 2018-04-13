@@ -6,11 +6,13 @@
 
 ## Basic Usage 
 
-* Quickstart Tutorial (together)
+* Quickstart Tutorial 
 
     * https://tomassetti.me/walkmod-automatically-refactor-code-to-apply-code-conventions/
     * http://walkmod.com/docs#usage
     * https://github.com/walkmod/quickstart
+    * What is there? `walkmod plugins`
+    * chose imports-cleaner
     * `walkmod add imports-cleaner`
     * `walkmod transformations`
     * `walkmod apply`
@@ -18,19 +20,16 @@
 
 * Includes, Excludes
 
-    * provide using `walkmod`
+    * provide using `walkmod add...`
     * provide using `-i` and `-x` in apply. 
     * `walkmod check`
+    * file based from `src` folder
+    * wildcard: `*.java, a/b/*, /a/b/**` - TODO read code
 
-* What is there?
-
-    * `walkmod plugins`
-    * imports-cleaner
-    * license-applier
+* Chains
+    
+    * TODO
     * override
-    * refactor
-    * `name` loads `org.walkmod:walkmod-" + name + "-plugin:" + name`
-    * `pluginId:beanId` loads `org.walkmod:walkmod-" + pluginId + "-plugin:" + beanId`
 
 * More Transformations
 
@@ -48,6 +47,13 @@
     * `walkmod apply`
     * `git diff`
     * `walkmod set-writer javalang:string-writer` does not format, is default.
+    * `<walker> with <param name="onlyWriteChanges">false</param>`
+
+* Other plugins
+
+    * refactor
+    * `name` loads `org.walkmod:walkmod-" + name + "-plugin:" + name`
+    * `pluginId:beanId` loads `org.walkmod:walkmod-" + pluginId + "-plugin:" + beanId`
 
 ### Code Generation using Templates
 
