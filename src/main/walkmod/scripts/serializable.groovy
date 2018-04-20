@@ -3,6 +3,8 @@ import javax.lang.model.element.Modifier
 import org.walkmod.javalang.ASTManager
 import com.squareup.javapoet.*
 
+// see https://blog.walkmod.com/how-to-maintain-java-architectures-with-javapoet-and-walkmod-45611b1bc627
+
 // User
 String entityName = node.types[0].name
 
