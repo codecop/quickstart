@@ -1,8 +1,21 @@
 # Steps
 
-* `walkmod --version`
-* `walkmod init -f xml` and see `walkmod.xml`
-* done automatically when missing on any command
+## Environment 
+
+* Installation
+
+    * download from http://walkmod.com/
+    * unzip
+    * set PATH to its bin: `set PATH=%PATH%;c:\walkmod-3.0.0\bin`
+    * set proxy if needed
+      `set WALKMOD_OPTS=-Dhttp.proxyHost=10.0.0.100 -Dhttp.proxyPort=8800` plus https 
+      or put into `JAVA_TOOL_OPTIONS`
+
+* Verify Installation
+
+    * `walkmod --version`
+    * `walkmod init -f xml` and see `walkmod.xml`
+    * done automatically when missing on any command
 
 ## Basic Usage 
 
