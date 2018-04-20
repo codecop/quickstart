@@ -1,14 +1,18 @@
 # Steps
 
-## Environment 
+## Background Theory (1h)
 
-* Installation
+## Environment
+
+* Goal: Have Walkmod ready to use.
+
+* Installation (15')
 
     * download from http://walkmod.com/
     * unzip
     * set PATH to its bin: `set PATH=%PATH%;c:\walkmod-3.0.0\bin`
     * set proxy if needed
-      `set WALKMOD_OPTS=-Dhttp.proxyHost=10.0.0.100 -Dhttp.proxyPort=8800` plus https 
+      `set WALKMOD_OPTS=-Dhttp.proxyHost=10.0.0.100 -Dhttp.proxyPort=8800` plus `https`
       or put into `JAVA_TOOL_OPTIONS`
 
 * Verify Installation
@@ -17,83 +21,104 @@
     * `walkmod init -f xml` and see `walkmod.xml`
     * done automatically when missing on any command
 
-## Basic Usage 
+## Basic Usage
 
-* Quickstart Tutorial 
+## Quickstart Tutorial
 
-    * https://tomassetti.me/walkmod-automatically-refactor-code-to-apply-code-conventions/
-    * http://walkmod.com/docs#usage
-    * https://github.com/walkmod/quickstart
-    * What is there? `walkmod plugins`
+* https://tomassetti.me/walkmod-automatically-refactor-code-to-apply-code-conventions/
+* https://github.com/walkmod/quickstart
+
+* What is there?
+
+    * Goal: Get an idea what it can do.
+    * `walkmod plugins`
     * chose imports-cleaner
+
+* First Usage (15')
+
+    * Goal: Use a basic plugin with no arguments.
+    * http://walkmod.com/docs#usage
     * `walkmod add imports-cleaner`
     * `walkmod transformations`
     * `walkmod apply`
     * `git diff`
 
-* Includes, Excludes
+* Includes, Excludes (15')
 
+    * Goal: Manage to exclude certain sources from transformation.
     * provide using `walkmod add...`
-    * provide using `-i` and `-x` in apply. 
+    * provide using `-i` and `-x` in apply.
     * `walkmod check`
     * file based from `src` folder
-    * wildcard: `*.java, a/b/*, /a/b/**` - TODO read code
+    * wildcard: `*.java`, `a/b/*`, `/a/b/**` - TODO read code for all options
 
-* Chains
-    
-    * TODO
-    * override
+* Chains (15')
 
-* More Transformations
+    * Goal: Use Chains to run two transformations on two folders.
+    * Chains separate transformations of different source folders
+    * `walkmod add override`
+    * see example chains in https://github.com/walkmod/jug
 
+* Break (15')
+
+* More Transformations (15')
+
+    * Goal: Use transformations which need parameters, figure out usage.
     * `walkmod add license-applier`
+    * `walkmod apply`
     * Missing license file at [src/main/walkmod/license-applier/license.txt]
-    * `walkmod  inspect license-applier`
+    * `walkmod inspect license-applier`
     * configure: `<param name="licenseFile">src/main/license-header.txt</param>`
     * or `walkmod add -DlicenseFile=... license-applier`
-    * ? license-applier and imports-cleaner do not work together
+    * TODO second parameter `action` - what does it do?
+    * TODO license-applier and imports-cleaner do not work together?
 
-* Formatter
+* Formatter (15')
 
+    * Goal: Use Eclipse formatting and provide your own formatter.
     * `walkmod set-writer -DconfigFile=myformatter.xml java-formatter` formats like Eclipse
-    * `walkmod add override`
     * `walkmod apply`
     * `git diff`
     * `walkmod set-writer javalang:string-writer` does not format, is default.
-    * `<walker> with <param name="onlyWriteChanges">false</param>`
+    * `<walker>` with `<param name="onlyWriteChanges">false</param>` updates unchanged files, too.
+      see https://github.com/walkmod/walkmod-java-formatter-plugin/issues/3
 
-* Other plugins
+* What else is there? Other Plugins (15')
 
-    * refactor
+    * Goal: Check out some other plugins.
+    * `refactor`
     * `name` loads `org.walkmod:walkmod-" + name + "-plugin:" + name`
     * `pluginId:beanId` loads `org.walkmod:walkmod-" + pluginId + "-plugin:" + beanId`
-
-### Code Generation using Templates
-
-* See https://github.com/walkmod/jug
-* Transformation type `template` = `walkmod:commons:template`.
-* `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
+    * Plugins to fix PMD and Sonar issues. E.g. https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
 
 ### Custom (Groovy) Scripts
 
 * Transformation type `script` = `walkmod:commons:scripting`.
 * Scripts to manipulate the AST are written in Groovy (or any other Java scripting language).
 
+* Sample Scripts (15')
+
+    * Goal: Run a given script.
     * https://www.voxxed.com/2014/11/walkmod-tutorial-apply-code-conventions-automatically/
-    * `fields.groovy` makes all fields private.
+    * given `fields.groovy` makes all fields private.
     * `walkmod add -m script -Dlanguage=groovy -Dlocation=src\main\walkmod\scripts\fields.groovy`
-    * also works with `-Dcontent` and script directly
+    * also works with `-Dcontent` and paste script directly
     * `walkmod apply`
     * `git diff`
-    
-* There is support for Groovy in Java IDEs and it helps for large Groovy scripts.    
-    
+
+* There is support for Groovy in Java IDEs and it helps for large Groovy scripts.
+
+    * Goal: Prepare Eclipse to get Groovy support.
     * Check version of Eclipse.
     * Groovy plugin "GrEclipse", look for suitable release or snapshot on https://github.com/groovy/groovy-eclipse/wiki#releases
     * How to Install see https://github.com/groovy/groovy-eclipse/wiki#how-to-install
     * Add core dependencies for code completion: `org.walkmod:walkmod-core:3.0.4, org.walkmod:javalang:4.8.8`
+    * Add imports to Groovy script.
+    * See code completion in IDE.
 
-* Integrating with JavaPoet
+* Create your own script
+
+* Example Integrating with JavaPoet (optional)
 
     * https://blog.walkmod.com/how-to-maintain-java-architectures-with-javapoet-and-walkmod-45611b1bc627
     * https://github.com/walkmod/helloworld-javapoet (empty)
@@ -101,7 +126,13 @@
     * JavaPoet is part of Walkmod.
     * Add to test dependencies to create scripts: `com.squareup:javapoet:1.10.0`
 
-## PMD and Sonar Plugins
+### Code Generation using Templates
+
+* See https://github.com/walkmod/jug
+* Transformation type `template` = `walkmod:commons:template`.
+* `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
+
+### PMD and Sonar Plugins
 
 * https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
 * https://github.com/rpau/voxxed-age-checker
@@ -124,16 +155,27 @@
 
 ### Issues
 
+* Proxy setting is always an issue in enterprises.
 * `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"`
-    * need a SLF4J to Log4J bridge 
+    * need a SLF4J to Log4J bridge
 * license-applier and imports-cleaner do not work together
-* no formatting is default writer in 3.0, documentation is wrong
 * changes on walkmod.xml drop comments
-* no tutorial for templating - found jug project later
 * JavaPoet example destroys formatting
 * JavaPoet and other scripting does not work together
 * `VisitorMessagesWriter` did not write on `walkmod check`
-* Downloads everything again (in fact an Ivy issue, allow to provide `ivysettings.xml` - in config folder).
+* `add exclude` creates an `<include>` ?
+* `override` plugin performs `mvn install` - why?
+
+* Ivy is not common in enterprises
+
+    * Downloads everything again (in fact an Ivy issue, allow to provide `ivysettings.xml` - in config folder).
     * http://ant.apache.org/ivy/history/latest-milestone/tutorial/defaultconf.html
     * https://stackoverflow.com/questions/8617963/ivysettings-xml-add-local-maven-path
     * just changing it does not work...
+
+* Missing documentation
+
+    * no tutorial for templating - found jug project later
+    * no formatting is default writer in 3.0, documentation is wrong
+    * Did not find any help for script tag.
+    * I am missing documentation a lot ;-)
