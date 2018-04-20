@@ -70,6 +70,7 @@
     * `walkmod inspect license-applier`
     * configure: `<param name="licenseFile">src/main/license-header.txt</param>`
     * or `walkmod add -DlicenseFile=... license-applier`
+    * has more options like add, replace, etc.
     * TODO second parameter `action` - what does it do?
     * TODO license-applier and imports-cleaner do not work together?
 
@@ -118,6 +119,13 @@
 
 * Create your own script
 
+    * Goal: Create a basic transformation using a Groovy script.
+    * What can we do with `org.walkmod.javalang.ast.CompilationUnit node`. 
+      Plus `walkmod/config/query.alias.groovy` defines aliases
+    * `org.walkmod.walkers.VisitorContext context`
+    * `org.walkmod.query.QueryEngine query` is a map, with result node(s), messages and data.
+      e.g. `context.addResultNode(ASTManager.parse(javaFile.toString(), true))`
+
 * Example Integrating with JavaPoet (optional)
 
     * https://blog.walkmod.com/how-to-maintain-java-architectures-with-javapoet-and-walkmod-45611b1bc627
@@ -165,6 +173,7 @@
 * `VisitorMessagesWriter` did not write on `walkmod check`
 * `add exclude` creates an `<include>` ?
 * `override` plugin performs `mvn install` - why?
+* no offline mode?
 
 * Ivy is not common in enterprises
 
