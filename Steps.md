@@ -2,6 +2,13 @@
 
 ## Background Theory (1h)
 
+* "walkmod - how it works.pdf"
+
+* Raquel Pau - How to Maintain and Fix code conventions with SonarQube and Walkmod (JBCNConf 2016)
+
+    * https://www.slideshare.net/walkmod/barcelonajug2016-walkmod-how-to-run-and-design-code-transformations 
+    * https://www.youtube.com/watch?v=-A3YccWOfzY
+
 ## Environment
 
 * Goal: Have Walkmod ready to use.
@@ -23,7 +30,7 @@
 
 ## Basic Usage
 
-## Quickstart Tutorial
+### Quickstart Tutorial
 
 * https://tomassetti.me/walkmod-automatically-refactor-code-to-apply-code-conventions/
 * https://github.com/walkmod/quickstart
@@ -120,7 +127,7 @@
 * Create your own script
 
     * Goal: Create a basic transformation using a Groovy script.
-    * What can we do with `org.walkmod.javalang.ast.CompilationUnit node`. 
+    * What can we do with `org.walkmod.javalang.ast.CompilationUnit node`.
       Plus `walkmod/config/query.alias.groovy` defines aliases
     * `org.walkmod.walkers.VisitorContext context`
     * `org.walkmod.query.QueryEngine query` is a map, with result node(s), messages and data.
@@ -140,15 +147,37 @@
 * Transformation type `template` = `walkmod:commons:template`.
 * `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
 
-### PMD and Sonar Plugins
+## Your Own Transformations
 
-* https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
-* https://github.com/rpau/voxxed-age-checker
-* tbc
+### Basic Plugins
 
-## Writing Plugins/Visitors
+* Refactoring Plugin
 
-* all plugins are `VoidVisitor`s or similar.
+    * read documentation, apply, read source
+    * tbd
+
+### PMD and SonarCube Plugins
+
+* Walkmod PMD
+
+    * Goal: Know how to use the PMD and plugin.
+    * https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
+    * https://github.com/rpau/voxxed-age-checker
+
+* Walkmod SonarCube
+
+    * Goal: Know how to use it.
+    * apply Walkmod Maven Plugin SonarCube fixes 
+
+### Writing Plugins/Visitors
+
+* All plugins are `VoidVisitor`s or similar.
+* follow "How to Maintain and Fix code conventions with SonarQube and Walkmod"
+* Proposed Process
+
+    * run only one refactoring rule at a time to do single purpose commits.
+    * do a pre-commit code review to check all the changes are approved by the developer.
+    * Commit the change, then move on to run the next refactoring rule.
 
 ## Trouble Shooting
 
