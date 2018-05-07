@@ -114,9 +114,10 @@
     * `walkmod apply`
     * `git diff`
 
-* There is support for Groovy in Java IDEs and it helps for large Groovy scripts.
+* There is support for Groovy in Java IDEs and it helps for large Groovy scripts. (15')
 
     * Goal: Prepare Eclipse to get Groovy support.
+    * IDEA works out of the box (just need to add folder as Groovy source folder)
     * Check version of Eclipse.
     * Groovy plugin "GrEclipse", look for suitable release or snapshot on https://github.com/groovy/groovy-eclipse/wiki#releases
     * How to Install see https://github.com/groovy/groovy-eclipse/wiki#how-to-install
@@ -124,14 +125,14 @@
     * Add imports to Groovy script.
     * See code completion in IDE.
 
-* Create your own script
+* Create your own script (90')
 
     * Goal: Create a basic transformation using a Groovy script.
     * What can we do with `org.walkmod.javalang.ast.CompilationUnit node`.
       Plus `walkmod/config/query.alias.groovy` defines aliases
-    * `org.walkmod.walkers.VisitorContext context`
-    * `org.walkmod.query.QueryEngine query` is a map, with result node(s), messages and data.
+    * `org.walkmod.walkers.VisitorContext context` is a map, with result node(s), messages and data.
       e.g. `context.addResultNode(ASTManager.parse(javaFile.toString(), true))`
+    * `org.walkmod.query.QueryEngine query` is for resolving values (in templates). 
 
 * Example Integrating with JavaPoet (optional)
 
@@ -141,11 +142,13 @@
     * JavaPoet is part of Walkmod.
     * Add to test dependencies to create scripts: `com.squareup:javapoet:1.10.0`
 
-### Code Generation using Templates
+### Code Generation using Templates (30')
 
-* See https://github.com/walkmod/jug
+* Goal: See what is possible (Demo).
 * Transformation type `template` = `walkmod:commons:template`.
 * `<transformation type="walkmod:commons:template" isMergeable="true">` adds code to each class
+* See https://github.com/walkmod/jug
+
 
 ## Your Own Transformations
 
@@ -158,11 +161,12 @@
 
 ### PMD and SonarCube Plugins
 
-* Walkmod PMD
+* Walkmod PMD with Maven
 
-    * Goal: Know how to use the PMD and plugin.
+    * Goal: Know how to use the Walkmod Maven and PMD plugin.
     * https://blog.walkmod.com/how-to-fix-pmd-violations-with-walkmod-6aedbc65773c
     * https://github.com/rpau/voxxed-age-checker
+        * Walkmod Maven Plugin help page
 
 * Walkmod SonarCube
 
@@ -185,6 +189,7 @@
 * `walkmod apply -e` shows errors.
 * ? cannot locate mentioned log file.
 * use `println` in Groovy scripts.
+* `... --offline` for `apply` to speed up run (after first run)
 
 > No # in path names!
 
@@ -197,12 +202,15 @@
     * need a SLF4J to Log4J bridge
 * license-applier and imports-cleaner do not work together
 * changes on walkmod.xml drop comments
+* even there is a YML config, it creates a new XML file.
 * JavaPoet example destroys formatting
 * JavaPoet and other scripting does not work together
 * `VisitorMessagesWriter` did not write on `walkmod check`
 * `add exclude` creates an `<include>` ?
 * `override` plugin performs `mvn install` - why?
 * no offline mode?
+* `LocationImpl` needs toString for error cases
+  `Error visiting a Java source file - org.walkmod.util.location.LocationImpl@103bf3c at org.walkmod.javalang.walkers.DefaultJavaWalker.visit(DefaultJavaWalker.java:505)`
 
 * Ivy is not common in enterprises
 
@@ -210,6 +218,8 @@
     * http://ant.apache.org/ivy/history/latest-milestone/tutorial/defaultconf.html
     * https://stackoverflow.com/questions/8617963/ivysettings-xml-add-local-maven-path
     * just changing it does not work...
+    * Corporate Nexus as 1st in Ivy settings - issue!
+    * Dependency load failes (Ivy mix problem) - delete ivy cache
 
 * Missing documentation
 
