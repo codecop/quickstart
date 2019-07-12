@@ -1,4 +1,4 @@
-package org.walkmod.quickstart;
+package org.walkmod.quickstart.basics;
 
 
 public 
