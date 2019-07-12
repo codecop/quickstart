@@ -30,21 +30,23 @@
         <reader path="src/main/java">
             <include wildcard="org/walkmod/quickstart/model/*"></include>
         </reader>
-
         <!--
         <transformation type="walkmod:commons:template" isMergeable="true">
             <param name="templates">["src/main/walkmod/templates/jpa-id.groovy"]</param>
         </transformation>
+        -->
+        <!--
         <transformation isMergeable="true" type="script">
             <param name="language">groovy</param>
             <param name="location">src\main\walkmod\scripts\serializable.groovy</param>
         </transformation>
         -->
+        <!--
         <transformation type="walkmod:commons:scripting">
             <param name="language">groovy</param>
             <param name="location">src/main/walkmod/scripts/fields.groovy</param>
         </transformation>
-
+        -->
         <transformation type="setter-getter:setter-getter-gen" isMergeable="true" />
     </chain>
 </walkmod>
