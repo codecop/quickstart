@@ -49,4 +49,13 @@
         -->
         <transformation type="setter-getter:setter-getter-gen" isMergeable="true" />
     </chain>
+    <chain name="change-injection">
+        <reader path="src/main/java">
+            <include wildcard="org/walkmod/quickstart/change_injection/*"></include>
+        </reader>
+        <transformation isMergeable="true" type="script">
+            <param name="language">groovy</param>
+            <param name="location">src\main\walkmod\change_injection\inject.groovy</param>
+        </transformation>
+    </chain>
 </walkmod>
