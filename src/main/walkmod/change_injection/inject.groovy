@@ -6,6 +6,8 @@ import org.walkmod.javalang.ast.body.FieldDeclaration
 import org.walkmod.javalang.ast.body.ModifierSet
 import org.walkmod.javalang.ast.body.TypeDeclaration
 import org.walkmod.javalang.ast.stmt.BlockStmt
+import org.walkmod.javalang.ast.expr.MarkerAnnotationExpr
+import org.walkmod.javalang.ast.expr.NameExpr
 
 import groovy.inspect.Inspector.MemberComparator
 
@@ -17,28 +19,32 @@ def processFile(CompilationUnit file) {
 }
 
 def processType(TypeDeclaration type) {
-    fields = findInjectedFields(type)
-    if (!fields) {
+    injectedFields = findInjectedFields(type)
+    if (!injectedFields) {
         return
     }
 
     println("--- class " + type.name)
-    // println(fields)
-    // fields.each { removeAnnotation(it) }
+    // println(injectedFields)
+    // injectedFields.each { removeInjectAnnotation(it) }
 
     constructors = findConstuctors(type)
-    println(constructors)
+    constructor = null
     if (!constructors) {
-        modifiers = ModifierSet.PUBLIC
-        constructor = new ConstructorDeclaration(modifiers, type.name)
-        constructor.block = new BlockStmt();
-        
-        constructors.add(constructor)
+        constructor = createConstructor(type.name)
         type.members.add(0, constructor)
+    } else {
+        constructor = constructors[0]
+    }
+    // println(constructor)
+    if (! constructor.annotations) {
+        constructor.annotations = []
+    }
+    
+    if (! constructor.annotations.any { it.name.name == "Inject" }) {
+        constructor.annotations.add(new MarkerAnnotationExpr(new NameExpr("Inject")))
     }
 
-    // if none create one
-    // add @Inject to constructor (if not there)
     // add argument to list
     // add setting to body
 }
@@ -49,13 +55,20 @@ def findInjectedFields(TypeDeclaration type) {
             findAll { it.annotations.any { it.name.name == "Inject" } }
 }
 
-def removeAnnotation(FieldDeclaration field) {
+def removeInjectAnnotation(FieldDeclaration field) {
     field.annotations = field.annotations.findAll { it.name.name != "Inject" }
 }
 
 def findConstuctors(TypeDeclaration type) {
     return type.members.
             findAll { it instanceof ConstructorDeclaration }
+}
+
+def createConstructor(name) {
+    modifiers = ModifierSet.PUBLIC
+    constructor = new ConstructorDeclaration(modifiers, name)
+    constructor.block = new BlockStmt()
+    return constructor
 }
 
 // available bindings:
