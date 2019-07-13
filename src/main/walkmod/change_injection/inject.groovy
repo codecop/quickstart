@@ -8,6 +8,7 @@ import org.walkmod.javalang.ast.body.TypeDeclaration
 import org.walkmod.javalang.ast.stmt.BlockStmt
 import org.walkmod.javalang.ast.expr.MarkerAnnotationExpr
 import org.walkmod.javalang.ast.expr.NameExpr
+import org.walkmod.javalang.ast.body.Parameter
 
 import groovy.inspect.Inspector.MemberComparator
 
@@ -19,33 +20,39 @@ def processFile(CompilationUnit file) {
 }
 
 def processType(TypeDeclaration type) {
+    println("--- class " + type.name)
+
     injectedFields = findInjectedFields(type)
     if (!injectedFields) {
         return
     }
+    println(injectedFields)
 
-    println("--- class " + type.name)
-    // println(injectedFields)
     // injectedFields.each { removeInjectAnnotation(it) }
 
     constructors = findConstuctors(type)
-    constructor = null
     if (!constructors) {
         constructor = createConstructor(type.name)
-        type.members.add(0, constructor)
+        type.members.add(constructor)
     } else {
         constructor = constructors[0]
     }
-    // println(constructor)
-    if (! constructor.annotations) {
-        constructor.annotations = []
-    }
-    
+
     if (! constructor.annotations.any { it.name.name == "Inject" }) {
+        if (! constructor.annotations) {
+            constructor.annotations = []
+        }
         constructor.annotations.add(new MarkerAnnotationExpr(new NameExpr("Inject")))
     }
 
-    // add argument to list
+    if (! constructor.parameters) {
+        constructor.parameters = []
+    }
+    injectedFields.each {
+        constructor.parameters.add(new Parameter(it.type, it.variables[0].id))
+    }
+    println(constructor)
+
     // add setting to body
 }
 
