@@ -15,44 +15,38 @@ import org.walkmod.javalang.ast.expr.NameExpr
 import org.walkmod.javalang.ast.expr.FieldAccessExpr
 import org.walkmod.javalang.ast.expr.ThisExpr
 
-import groovy.inspect.Inspector.MemberComparator
-
 
 injectAnnotation = new MarkerAnnotationExpr(new NameExpr("Inject"))
 
 def processFile(CompilationUnit file) {
-    // println(file.fileName)
-    // println(file.getPackage())
+    // println("file " + file.fileName)
     file.types.each { processType(it) }
 }
 
 def processType(TypeDeclaration type) {
-    println("--- class " + type.name)
+    // println("class " + type.name)
 
     injectedFields = findInjectedFields(type)
     if (!injectedFields) {
         return
     }
-    println(injectedFields)
+    // println(injectedFields)
 
     injectedFields.each { removeInjectAnnotation(it) }
 
     ConstructorDeclaration constructor = getConstuctor(type)
-
     if (! hasInjectAnnotation(constructor)) {
-        constructor.annotations.add(injectAnnotation)
+        constructor.annotations += injectAnnotation
     }
-    // println(constructor.block.stmts[0].expr.target.scope.class)
 
     injectedFields.each {
-        constructor.parameters.add(new Parameter(it.type, it.variables[0].id))
+        constructor.parameters += new Parameter(it.type, it.variables[0].id)
         // TODO unhandled: Multiple fields in one variable declaration.
 
         assignment = createAssignment(it.variables[0].id.name)
-        constructor.block.stmts.add(assignment)
+        constructor.block.stmts += assignment
     }
-
-    println(constructor)
+    // println(constructor)
 }
 
 def findInjectedFields(TypeDeclaration type) {
@@ -70,7 +64,7 @@ def removeInjectAnnotation(FieldDeclaration field) {
 }
 
 def getConstuctor(TypeDeclaration type) {
-    constructors = findConstuctors(type)
+    constructors = findConstructors(type)
     if (!constructors) {
         constructor = createConstructor(type.name)
         type.members.add(constructor)
@@ -83,12 +77,13 @@ def getConstuctor(TypeDeclaration type) {
     constructor.annotations = constructor.annotations ?: []
     constructor.parameters = constructor.parameters ?: []
 
+    markAsChanged(constructor)
+
     return constructor
 }
 
-def findConstuctors(TypeDeclaration type) {
-    return type.members.
-            findAll { it instanceof ConstructorDeclaration }
+def findConstructors(TypeDeclaration type) {
+    return type.members.findAll { it instanceof ConstructorDeclaration }
 }
 
 def createConstructor(name) {
@@ -97,6 +92,13 @@ def createConstructor(name) {
     constructor.block = new BlockStmt()
     constructor.block.stmts = constructor.block.stmts ?: []
     return constructor
+}
+
+def markAsChanged(node) {
+    node.beginLine = 0
+    node.beginColumn = 0
+    node.endLine = 0
+    node.endColumn = 0
 }
 
 def createAssignment(fieldName) {
