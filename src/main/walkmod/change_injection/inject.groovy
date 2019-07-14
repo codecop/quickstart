@@ -13,6 +13,8 @@ import org.walkmod.javalang.ast.body.Parameter
 import groovy.inspect.Inspector.MemberComparator
 
 
+injectAnnotation = new MarkerAnnotationExpr(new NameExpr("Inject"))
+
 def processFile(CompilationUnit file) {
     // println(file.fileName)
     // println(file.getPackage())
@@ -28,28 +30,17 @@ def processType(TypeDeclaration type) {
     }
     println(injectedFields)
 
-    // injectedFields.each { removeInjectAnnotation(it) }
+    injectedFields.each { removeInjectAnnotation(it) }
 
-    constructors = findConstuctors(type)
-    if (!constructors) {
-        constructor = createConstructor(type.name)
-        type.members.add(constructor)
-    } else {
-        constructor = constructors[0]
+    constructor = getConstuctor(type)
+
+    if (! hasInjectAnnotation(constructor)) {
+        constructor.annotations.add(injectAnnotation)
     }
 
-    if (! constructor.annotations.any { it.name.name == "Inject" }) {
-        if (! constructor.annotations) {
-            constructor.annotations = []
-        }
-        constructor.annotations.add(new MarkerAnnotationExpr(new NameExpr("Inject")))
-    }
-
-    if (! constructor.parameters) {
-        constructor.parameters = []
-    }
     injectedFields.each {
         constructor.parameters.add(new Parameter(it.type, it.variables[0].id))
+        // TODO unhandled: Multiple fields in one variable declaration.
     }
     println(constructor)
 
@@ -59,11 +50,32 @@ def processType(TypeDeclaration type) {
 def findInjectedFields(TypeDeclaration type) {
     return type.members.
             findAll { it instanceof FieldDeclaration }.
-            findAll { it.annotations.any { it.name.name == "Inject" } }
+            findAll { hasInjectAnnotation(it) }
+}
+
+def hasInjectAnnotation(body) {
+    return body.annotations.any { it.name.name == "Inject" }
 }
 
 def removeInjectAnnotation(FieldDeclaration field) {
     field.annotations = field.annotations.findAll { it.name.name != "Inject" }
+}
+
+def getConstuctor(TypeDeclaration type) {
+    constructors = findConstuctors(type)
+    if (!constructors) {
+        constructor = createConstructor(type.name)
+        type.members.add(constructor)
+        // TODO Generated constructor added not after all fields.
+    } else {
+        constructor = constructors[0]
+        // TODO unhandled: Multiple constructors to be modified.
+    }
+
+    constructor.annotations = constructor.annotations ?: []
+    constructor.parameters = constructor.parameters ?: []
+
+    return constructor
 }
 
 def findConstuctors(TypeDeclaration type) {
@@ -84,10 +96,3 @@ def createConstructor(name) {
 // org.walkmod.query.QueryEngine query;
 
 processFile(node)
-
-/*
- * TODO bot handled cases:
- * Multiple fields in one variable declaration.
- * Multiple constructors to be modified.
- * Generated constructor not after all fields.
- */
