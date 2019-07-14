@@ -59,6 +59,15 @@
             <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- dependencies for debugging shooting Walkmod -->
+        <!-- 
+        <dependency>
+            <groupId>org.walkmod</groupId>
+            <artifactId>walkmod-javalang-plugin</artifactId>
+            <version>3.0.6</version>
+            <scope>test</scope>
+        </dependency>
+        -->
     </dependencies>
     <repositories>
         <repository>

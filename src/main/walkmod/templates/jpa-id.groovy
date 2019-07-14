@@ -4,8 +4,6 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-// see https://github.com/walkmod/jug
-
 public class ${query.resolve("type.name")} {
 
    @Id
