@@ -129,7 +129,7 @@
 
     * Goal: Create a basic transformation using a Groovy script.
     * What can we do with `org.walkmod.javalang.ast.CompilationUnit node`.
-      Plus `walkmod/config/query.alias.groovy` defines aliases
+      Plus `$WALKMOD_HOME/config/query.alias.groovy` defines aliases `getFields` and `getMethods`
     * `org.walkmod.walkers.VisitorContext context` is a map, with result node(s), messages and data.
       e.g. `context.addResultNode(ASTManager.parse(javaFile.toString(), true))`
     * `org.walkmod.query.QueryEngine query` is for resolving values (in templates). 
@@ -202,7 +202,7 @@
     * need a SLF4J to Log4J bridge
 * license-applier and imports-cleaner do not work together
 * changes on walkmod.xml drop comments
-* even there is a YML config, it creates a new XML file.
+* even there is a YML configuration, it creates a new XML file.
 * JavaPoet example destroys formatting
 * JavaPoet and other scripting does not work together
 * `VisitorMessagesWriter` did not write on `walkmod check`
@@ -219,11 +219,11 @@
     * https://stackoverflow.com/questions/8617963/ivysettings-xml-add-local-maven-path
     * just changing it does not work...
     * Corporate Nexus as 1st in Ivy settings - issue!
-    * Dependency load failes (Ivy mix problem) - delete ivy cache
+    * Dependency load fails (Ivy mix problem) - delete ivy cache
 
 * Missing documentation
 
-    * no tutorial for templating - found jug project later
+    * no tutorial for templates - found jug project later
     * no formatting is default writer in 3.0, documentation is wrong
     * Did not find any help for script tag.
     * I am missing documentation a lot ;-)
