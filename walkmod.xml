@@ -1,54 +1,49 @@
 <!DOCTYPE walkmod PUBLIC "-//WALKMOD//DTD" "http://www.walkmod.com/dtd/walkmod-1.1.dtd">
 <walkmod>
+    <!--
     <chain name="default">
         <reader path="src/main/java">
             <include wildcard="org/walkmod/quickstart/basics/*"></include>
         </reader>
         <transformation type="imports-cleaner"/>
-        <!--
         <transformation type="license-applier">
             <param name="licenseFile">src/main/license-header.txt</param>
         </transformation>
-        -->
-        <!--
         <transformation type="override"/>
-        -->
-        <!--
-        <writer path="src/main/java" type="javalang:string-writer" />
         <writer path="src/main/java" type="java-formatter">
             <param name="configFile">src\config\eclipse_code_format.xml</param>
         </writer>
-        -->
     </chain>
+    -->
+    <!-- 
     <chain name="scripts">
         <transformation isMergeable="true" type="script">
             <param name="language">groovy</param>
             <param name="location">src\main\walkmod\scripts\log.groovy</param>
         </transformation>
+        <writer path="src/main/java" type="javalang:string-writer" />
     </chain>
+    -->
+    <!--
     <chain name="jpa-hibernate">
         <reader path="src/main/java">
             <include wildcard="org/walkmod/quickstart/model/*"></include>
         </reader>
-        <!--
         <transformation type="walkmod:commons:template" isMergeable="true">
             <param name="templates">["src/main/walkmod/templates/jpa-id.groovy"]</param>
         </transformation>
-        -->
-        <!--
         <transformation isMergeable="true" type="script">
             <param name="language">groovy</param>
             <param name="location">src\main\walkmod\scripts\serializable.groovy</param>
         </transformation>
-        -->
-        <!--
         <transformation type="walkmod:commons:scripting">
             <param name="language">groovy</param>
             <param name="location">src/main/walkmod/scripts/fields.groovy</param>
         </transformation>
-        -->
         <transformation type="setter-getter:setter-getter-gen" isMergeable="true" />
     </chain>
+    -->
+    <!--
     <chain name="change-injection">
         <reader path="src/main/java">
             <include wildcard="org/walkmod/quickstart/change_injection/*"></include>
@@ -58,4 +53,5 @@
             <param name="location">src\main\walkmod\change_injection\inject.groovy</param>
         </transformation>
     </chain>
+    -->
 </walkmod>
