@@ -6,9 +6,14 @@ import org.walkmod.javalang.ast.body.FieldDeclaration
 import org.walkmod.javalang.ast.body.ModifierSet
 import org.walkmod.javalang.ast.body.TypeDeclaration
 import org.walkmod.javalang.ast.stmt.BlockStmt
+import org.walkmod.javalang.ast.stmt.ExpressionStmt
 import org.walkmod.javalang.ast.expr.MarkerAnnotationExpr
 import org.walkmod.javalang.ast.expr.NameExpr
 import org.walkmod.javalang.ast.body.Parameter
+import org.walkmod.javalang.ast.expr.AssignExpr
+import org.walkmod.javalang.ast.expr.NameExpr
+import org.walkmod.javalang.ast.expr.FieldAccessExpr
+import org.walkmod.javalang.ast.expr.ThisExpr
 
 import groovy.inspect.Inspector.MemberComparator
 
@@ -32,19 +37,22 @@ def processType(TypeDeclaration type) {
 
     injectedFields.each { removeInjectAnnotation(it) }
 
-    constructor = getConstuctor(type)
+    ConstructorDeclaration constructor = getConstuctor(type)
 
     if (! hasInjectAnnotation(constructor)) {
         constructor.annotations.add(injectAnnotation)
     }
+    // println(constructor.block.stmts[0].expr.target.scope.class)
 
     injectedFields.each {
         constructor.parameters.add(new Parameter(it.type, it.variables[0].id))
         // TODO unhandled: Multiple fields in one variable declaration.
-    }
-    println(constructor)
 
-    // add setting to body
+        assignment = createAssignment(it.variables[0].id.name)
+        constructor.block.stmts.add(assignment)
+    }
+
+    println(constructor)
 }
 
 def findInjectedFields(TypeDeclaration type) {
@@ -87,7 +95,16 @@ def createConstructor(name) {
     modifiers = ModifierSet.PUBLIC
     constructor = new ConstructorDeclaration(modifiers, name)
     constructor.block = new BlockStmt()
+    constructor.block.stmts = constructor.block.stmts ?: []
     return constructor
+}
+
+def createAssignment(fieldName) {
+    field = new FieldAccessExpr(new ThisExpr(), fieldName)
+    parameter = new NameExpr(fieldName)
+    operator = AssignExpr.Operator.assign
+
+    new ExpressionStmt(new AssignExpr(field, parameter, operator))
 }
 
 // available bindings:
