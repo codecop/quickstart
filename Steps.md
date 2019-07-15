@@ -212,6 +212,7 @@
 * `LocationImpl` needs toString for error cases
   `Error visiting a Java source file - org.walkmod.util.location.LocationImpl@103bf3c at org.walkmod.javalang.walkers.DefaultJavaWalker.visit(DefaultJavaWalker.java:505)`
 * Templates fail with `Error visiting a Java source file` when there are comments in it.
+* URL of rawclasspath plugin points wrongly to Maven plugin.
 
 * Ivy is not common in enterprises
 
