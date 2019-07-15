@@ -16,6 +16,19 @@
     </chain>
     -->
     <!-- 
+    <chain name="example-chain">
+        <reader path="src/main/java">
+            <include wildcard="org/walkmod/quickstart/refactor/*"></include>
+        </reader>
+        <transformation type="refactor:methods">
+            <param name="refactoringConfigFile">src/main/walkmod/refactor/refactoring-methods.json</param>
+        </transformation>
+        <transformation type="refactor:classes">
+            <param name="refactoringConfigFile">src/main/walkmod/refactor/refactoring-classes.json</param>
+        </transformation>
+    </chain>
+    -->
+    <!-- 
     <chain name="scripts">
         <transformation isMergeable="true" type="script">
             <param name="language">groovy</param>

@@ -1,0 +1,4 @@
+{
+ "org.walkmod.quickstart.refactor.Bar:open(java.io.File file)" : "org.walkmod.quickstart.refactor.Bar:open(file.getPath())",
+ "org.walkmod.quickstart.refactor.Resource:isOpen()" : "org.walkmod.quickstart.refactor.Resource:isClosed():!result"
+}
