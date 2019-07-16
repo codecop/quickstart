@@ -218,6 +218,7 @@
 * Templates fail with `Error visiting a Java source file` when there are comments in it.
 * URL of `rawclasspath` plugin points wrongly to Maven plugin.
 * `import-cleaner` plugin crashes with NPEx if there is an extra ; after an unused import.
+* `refactor` does not recognise usages of the old class in the same package. 
 
 ### Ivy is not common in enterprises
 

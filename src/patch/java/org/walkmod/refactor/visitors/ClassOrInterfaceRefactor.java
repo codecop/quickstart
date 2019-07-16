@@ -177,7 +177,7 @@ public class ClassOrInterfaceRefactor extends
 
 		for (String key : keys) {
 			if (key.startsWith(name)) {
-				int index = key.indexOf(".");
+				int index = key.lastIndexOf(".");
 				if (index != -1) {
 					String alias = key.substring(index + 1);
 					aliasOldNamesMap.put(alias, key);
