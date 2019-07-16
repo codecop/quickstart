@@ -2,7 +2,7 @@ package org.walkmod.quickstart.basics;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;;
+import java.io.OutputStream;
 
 public class UnusedImports {
 

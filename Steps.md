@@ -200,19 +200,24 @@
 * Proxy setting is always an issue in enterprises.
 * `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"`
     * need a SLF4J to Log4J bridge
+    * where is it? Somewhere in Maven
 * license-applier and imports-cleaner do not work together
 * changes on walkmod.xml drop comments
 * even there is a YML configuration, it creates a new XML file.
 * JavaPoet example destroys formatting
 * JavaPoet and other scripting does not work together
 * `VisitorMessagesWriter` did not write on `walkmod check`
-* `add exclude` creates an `<include>` ?
+* `add exclude` creates an `<include>`
 * `override` plugin performs `mvn install` - why?
 * no offline mode?
-* `LocationImpl` needs toString for error cases
-  `Error visiting a Java source file - org.walkmod.util.location.LocationImpl@103bf3c at org.walkmod.javalang.walkers.DefaultJavaWalker.visit(DefaultJavaWalker.java:505)`
-* Templates fail with `Error visiting a Java source file` when there are comments in it.
-* URL of rawclasspath plugin points wrongly to Maven plugin.
+
+* Bugs
+
+    * `LocationImpl` needs toString for error cases
+      `Error visiting a Java source file - org.walkmod.util.location.LocationImpl@103bf3c at org.walkmod.javalang.walkers.DefaultJavaWalker.visit(DefaultJavaWalker.java:505)`
+    * Templates fail with `Error visiting a Java source file` when there are comments in it.
+    * URL of `rawclasspath` plugin points wrongly to Maven plugin.
+    * `import-cleaner` plugin crashes with NPEx if there is an extra ; after an unused import.
 
 * Ivy is not common in enterprises
 
