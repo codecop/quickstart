@@ -40,14 +40,12 @@
         </dependency>
         <!-- dependencies for Groovy scripting -->
         <dependency>
-            <!-- API -->            
             <groupId>org.walkmod</groupId>
             <artifactId>walkmod-core</artifactId>
             <version>3.0.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- AST -->
             <groupId>org.walkmod</groupId>
             <artifactId>javalang</artifactId>
             <version>4.8.8</version>
@@ -59,15 +57,25 @@
             <version>1.10.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- dependencies for debugging shooting Walkmod -->
-        <!-- 
+        <!-- dependencies for debugging Walkmod -->
         <dependency>
             <groupId>org.walkmod</groupId>
             <artifactId>walkmod-javalang-plugin</artifactId>
             <version>3.0.6</version>
             <scope>test</scope>
         </dependency>
-        -->
+        <dependency>
+            <groupId>org.walkmod</groupId>
+            <artifactId>walkmod-refactor-plugin</artifactId>
+            <version>2.3.3</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.walkmod</groupId>
+                    <artifactId>walkmod-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
