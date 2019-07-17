@@ -134,7 +134,7 @@ public class ClassOrInterfaceRefactor extends
 				for (String oldClassName : oldClassNames) {
 					if (oldClassName.startsWith(selectedType)) {
 
-						int index = oldClassName.indexOf(".");
+						int index = oldClassName.lastIndexOf(".");
 						if (!n.isStatic()) {
 							if (index != -1) {
 								String simpleName = oldClassName
