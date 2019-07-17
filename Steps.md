@@ -157,7 +157,7 @@
 
   * read documentation https://github.com/walkmod/walkmod-refactor-plugin
   * apply, read source
-  * tbd
+  * tbd - maybe this is not working
 
 ### PMD and SonarCube Plugins
 
@@ -218,7 +218,8 @@
 * Templates fail with `Error visiting a Java source file` when there are comments in it.
 * URL of `rawclasspath` plugin points wrongly to Maven plugin.
 * `import-cleaner` plugin crashes with NPEx if there is an extra ; after an unused import.
-* `refactor` does not recognise usages of the old class in the same package. 
+* `refactor` does not recognise usages of the old class in the same package.
+  I cannot get both refactor to perform any file changes. Sigh. 
 
 ### Ivy is not common in enterprises
 
